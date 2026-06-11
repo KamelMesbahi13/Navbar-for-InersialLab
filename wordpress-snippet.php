@@ -409,6 +409,19 @@ function inersialab_inject_styles() {
             display: none;
         }
     }
+    /* RTL adjustments */
+    .inersia-site-header[dir="rtl"],
+    .inersia-nav-drawer[dir="rtl"] {
+        direction: rtl;
+    }
+    .inersia-site-header[dir="rtl"] .inersia-logo,
+    .inersia-nav-drawer[dir="rtl"] .inersia-logo {
+        flex-direction: row;
+    }
+    .inersia-site-header[dir="rtl"] .inersia-desktop-nav a::after {
+        left: auto;
+        right: 0;
+    }
     </style>
     <?php
 }
@@ -420,27 +433,62 @@ function inersialab_inject_header_html() {
 }
 
 function inersialab_get_header_markup() {
+    // Detect Arabic from URL
+    $request_uri = $_SERVER['REQUEST_URI'] ?? '';
+    $is_arabic = (strpos($request_uri, '/ar/') !== false || preg_match('#/ar$#', $request_uri));
+    $dir = $is_arabic ? 'rtl' : 'ltr';
+
+    if ($is_arabic) {
+        $nav_services   = 'الخدمات';
+        $nav_about      = 'من نحن';
+        $nav_portfolio  = 'أعمالنا';
+        $nav_contact    = 'اتصل بنا';
+        $nav_cta        = 'ابدأ الآن';
+        $aria_label     = 'القائمة الرئيسية';
+        $close_label    = 'إغلاق القائمة';
+        $logo_url       = home_url('/ar/');
+        
+        $services_link  = '/ar#services';
+        $about_link     = '/ar#about';
+        $portfolio_link = '/ar#portfolio';
+        $contact_link   = '/ar#contact';
+    } else {
+        $nav_services   = 'Services';
+        $nav_about      = 'À propos';
+        $nav_portfolio  = 'Portfolio';
+        $nav_contact    = 'Contact';
+        $nav_cta        = 'Démarrer';
+        $aria_label     = 'Menu principal';
+        $close_label    = 'Fermer le menu';
+        $logo_url       = home_url('/');
+        
+        $services_link  = '#services';
+        $about_link     = '#about';
+        $portfolio_link = '#portfolio';
+        $contact_link   = '#contact';
+    }
+
     ob_start();
     ?>
     <div class="inersia-cursor" id="inersiaCursor"></div>
     <div class="inersia-cursor-ring" id="inersiaCursorRing"></div>
-    <header class="inersia-site-header" id="inersiaSiteHeader">
+    <header class="inersia-site-header" id="inersiaSiteHeader" dir="<?php echo $dir; ?>">
         <div class="inersia-header-container">
-            <a href="<?php echo esc_url(home_url('/')); ?>" class="inersia-logo">
+            <a href="<?php echo esc_url($logo_url); ?>" class="inersia-logo">
                 <img class="inersia-logo-icon" src="https://inersialab.com/wp-content/uploads/2026/06/inersialab_logo_icon_transparent.png" alt="InersiaLab Logo">
                 <span class="inersia-logo-text">Inersia<span class="text-bold">Lab</span></span>
             </a>
             <nav class="inersia-desktop-nav">
                 <ul>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#processus">Processus</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#temoignages">Témoignages</a></li>
+                    <li><a href="<?php echo esc_url($services_link); ?>"><?php echo esc_html($nav_services); ?></a></li>
+                    <li><a href="<?php echo esc_url($about_link); ?>"><?php echo esc_html($nav_about); ?></a></li>
+                    <li><a href="<?php echo esc_url($portfolio_link); ?>"><?php echo esc_html($nav_portfolio); ?></a></li>
+                    <li><a href="<?php echo esc_url($contact_link); ?>"><?php echo esc_html($nav_contact); ?></a></li>
                 </ul>
             </nav>
             <div class="inersia-header-actions">
-                <a href="#contact" class="inersia-btn-cta">Démarrer</a>
-                <button class="inersia-hamburger-menu" id="inersiaHamburgerBtn" aria-label="Menu principal">
+                <a href="<?php echo esc_url($contact_link); ?>" class="inersia-btn-cta"><?php echo esc_html($nav_cta); ?></a>
+                <button class="inersia-hamburger-menu" id="inersiaHamburgerBtn" aria-label="<?php echo esc_attr($aria_label); ?>">
                     <span class="inersia-bar line-top"></span>
                     <span class="inersia-bar line-mid"></span>
                     <span class="inersia-bar line-bot"></span>
@@ -448,14 +496,14 @@ function inersialab_get_header_markup() {
             </div>
         </div>
     </header>
-    <div class="inersia-nav-drawer" id="inersiaNavDrawer">
+    <div class="inersia-nav-drawer" id="inersiaNavDrawer" dir="<?php echo $dir; ?>">
         <div class="inersia-nav-drawer-container">
             <div class="inersia-nav-drawer-header">
-                <a href="<?php echo esc_url(home_url('/')); ?>" class="inersia-logo">
+                <a href="<?php echo esc_url($logo_url); ?>" class="inersia-logo">
                     <img class="inersia-logo-icon" src="https://inersialab.com/wp-content/uploads/2026/06/inersialab_logo_icon_transparent.png" alt="InersiaLab Logo">
                     <span class="inersia-logo-text">Inersia<span class="text-bold">Lab</span></span>
                 </a>
-                <button class="inersia-drawer-close" id="inersiaDrawerCloseBtn" aria-label="Fermer le menu">
+                <button class="inersia-drawer-close" id="inersiaDrawerCloseBtn" aria-label="<?php echo esc_attr($close_label); ?>">
                     <svg class="inersia-close-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18 6L6 18M6 6L18 18" stroke="#0D1B2A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
@@ -463,12 +511,12 @@ function inersialab_get_header_markup() {
             </div>
             <nav class="inersia-mobile-nav">
                 <ul>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#processus">Processus</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#temoignages">Témoignages</a></li>
+                    <li><a href="<?php echo esc_url($services_link); ?>"><?php echo esc_html($nav_services); ?></a></li>
+                    <li><a href="<?php echo esc_url($about_link); ?>"><?php echo esc_html($nav_about); ?></a></li>
+                    <li><a href="<?php echo esc_url($portfolio_link); ?>"><?php echo esc_html($nav_portfolio); ?></a></li>
+                    <li><a href="<?php echo esc_url($contact_link); ?>"><?php echo esc_html($nav_contact); ?></a></li>
                 </ul>
-                <a href="#contact" class="inersia-btn-cta-large">Démarrer</a>
+                <a href="<?php echo esc_url($contact_link); ?>" class="inersia-btn-cta-large"><?php echo esc_html($nav_cta); ?></a>
             </nav>
         </div>
     </div>
