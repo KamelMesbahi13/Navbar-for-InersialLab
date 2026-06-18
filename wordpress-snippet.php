@@ -134,37 +134,14 @@ function inersialab_inject_styles() {
         gap: 10px;
         text-decoration: none;
     }
-    .inersia-logo-icon {
-        width: 55px;
-        height: 55px;
+    .inersia-logo-img {
+        height: 48px;
         display: block;
         object-fit: contain;
-        transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-                    width 0.35s cubic-bezier(0.25, 1, 0.5, 1),
-                    height 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+        transition: height 0.35s cubic-bezier(0.25, 1, 0.5, 1);
     }
-    .inersia-site-header.scrolled .inersia-logo-icon {
-        width: 46px;
-        height: 46px;
-    }
-    .inersia-logo:hover .inersia-logo-icon {
-        transform: rotate(45deg);
-    }
-    .inersia-logo-text {
-        font-size: 24px;
-        font-weight: 600;
-        color: #060D14 !important; 
-        letter-spacing: -0.5px;
-        transition: font-size 0.35s cubic-bezier(0.25, 1, 0.5, 1),
-                    color 0.35s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-    .inersia-site-header.scrolled .inersia-logo-text {
-        font-size: 21px;
-        color: #060D14 !important;
-    }
-    .inersia-logo-text .text-bold {
-        font-weight: 700;
-        color: var(--inersia-primary-orange) !important;
+    .inersia-site-header.scrolled .inersia-logo-img {
+        height: 40px;
     }
     .inersia-desktop-nav {
         display: flex;
@@ -475,8 +452,7 @@ function inersialab_get_header_markup() {
     <header class="inersia-site-header" id="inersiaSiteHeader" dir="<?php echo $dir; ?>">
         <div class="inersia-header-container">
             <a href="<?php echo esc_url($logo_url); ?>" class="inersia-logo">
-                <img class="inersia-logo-icon" src="https://inersialab.com/wp-content/uploads/2026/06/inersialab_logo_icon_transparent.png" alt="InersiaLab Logo">
-                <span class="inersia-logo-text">Inersia<span class="text-bold">Lab</span></span>
+                <img class="inersia-logo-img" src="https://inersialab.com/wp-content/uploads/2026/06/horizontal_1300ppi.png" alt="InersiaLab Logo">
             </a>
             <nav class="inersia-desktop-nav">
                 <ul>
@@ -500,8 +476,7 @@ function inersialab_get_header_markup() {
         <div class="inersia-nav-drawer-container">
             <div class="inersia-nav-drawer-header">
                 <a href="<?php echo esc_url($logo_url); ?>" class="inersia-logo">
-                    <img class="inersia-logo-icon" src="https://inersialab.com/wp-content/uploads/2026/06/inersialab_logo_icon_transparent.png" alt="InersiaLab Logo">
-                    <span class="inersia-logo-text">Inersia<span class="text-bold">Lab</span></span>
+                    <img class="inersia-logo-img" src="https://inersialab.com/wp-content/uploads/2026/06/horizontal_1300ppi.png" alt="InersiaLab Logo">
                 </a>
                 <button class="inersia-drawer-close" id="inersiaDrawerCloseBtn" aria-label="<?php echo esc_attr($close_label); ?>">
                     <svg class="inersia-close-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
