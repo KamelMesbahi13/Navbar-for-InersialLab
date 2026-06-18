@@ -10,7 +10,7 @@ function inersialab_inject_styles() {
     ?>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
     :root {
         --inersia-bg-dark: #F0F4F8; 
@@ -20,7 +20,7 @@ function inersialab_inject_styles() {
         --inersia-white: #ffffff; 
         --inersia-steel-mist: #5A8AAA; 
         --inersia-border-color: rgba(30, 58, 95, 0.12); 
-        --inersia-font-main: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        --inersia-font-main: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         --inersia-transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
     }
     @media (min-width: 992px) {
@@ -158,7 +158,7 @@ function inersialab_inject_styles() {
         text-decoration: none;
         color: #0D1B2A !important; 
         font-size: 15px;
-        font-weight: 500;
+        font-weight: 400;
         transition: var(--inersia-transition);
         position: relative;
         padding: 6px 0;
@@ -192,7 +192,7 @@ function inersialab_inject_styles() {
         padding: 10px 24px;
         background-color: var(--inersia-primary-orange) !important;
         color: var(--inersia-white) !important;
-        font-weight: 600;
+        font-weight: 400;
         font-size: 15px;
         text-decoration: none;
         border-radius: 50px;
@@ -317,7 +317,7 @@ function inersialab_inject_styles() {
         display: block;
         font-family: var(--inersia-font-main) !important; 
         font-size: 20px; 
-        font-weight: 500; 
+        font-weight: 400; 
         color: #0D1B2A !important; 
         text-decoration: none;
         transition: var(--inersia-transition);
@@ -346,7 +346,7 @@ function inersialab_inject_styles() {
         background-color: var(--inersia-primary-orange) !important; 
         color: var(--inersia-white) !important; 
         font-family: var(--inersia-font-main) !important;
-        font-weight: 600 !important;
+        font-weight: 400 !important;
         font-size: 16px;
         text-align: center;
         text-decoration: none;
