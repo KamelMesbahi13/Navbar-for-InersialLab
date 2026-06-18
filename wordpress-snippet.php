@@ -425,10 +425,10 @@ function inersialab_get_header_markup() {
         $close_label    = 'إغلاق القائمة';
         $logo_url       = home_url('/ar/');
         
-        $services_link  = '/ar#services';
-        $about_link     = '/ar#about';
-        $portfolio_link = '/ar#portfolio';
-        $contact_link   = '/ar#contact';
+        $services_link  = '/ar/services/';
+        $about_link     = '/ar/about/';
+        $portfolio_link = '/ar/portfolio/';
+        $contact_link   = '/ar/contact/';
     } else {
         $nav_services   = 'Services';
         $nav_about      = 'À propos';
@@ -439,10 +439,10 @@ function inersialab_get_header_markup() {
         $close_label    = 'Fermer le menu';
         $logo_url       = home_url('/');
         
-        $services_link  = '#services';
-        $about_link     = '#about';
-        $portfolio_link = '#portfolio';
-        $contact_link   = '#contact';
+        $services_link  = '/services/';
+        $about_link     = '/about/';
+        $portfolio_link = '/portfolio/';
+        $contact_link   = '/contact/';
     }
 
     ob_start();
