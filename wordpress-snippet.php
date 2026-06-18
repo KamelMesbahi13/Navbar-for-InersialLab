@@ -452,7 +452,7 @@ function inersialab_get_header_markup() {
     <header class="inersia-site-header" id="inersiaSiteHeader" dir="<?php echo $dir; ?>">
         <div class="inersia-header-container">
             <a href="<?php echo esc_url($logo_url); ?>" class="inersia-logo">
-                <img class="inersia-logo-img" src="https://inersialab.com/wp-content/uploads/2026/06/horizontal_1300ppi.png" alt="InersiaLab Logo">
+                <img class="inersia-logo-img" src="https://inersialab.com/wp-content/uploads/2026/06/horizontal_1_png.png" alt="InersiaLab Logo">
             </a>
             <nav class="inersia-desktop-nav">
                 <ul>
@@ -476,7 +476,7 @@ function inersialab_get_header_markup() {
         <div class="inersia-nav-drawer-container">
             <div class="inersia-nav-drawer-header">
                 <a href="<?php echo esc_url($logo_url); ?>" class="inersia-logo">
-                    <img class="inersia-logo-img" src="https://inersialab.com/wp-content/uploads/2026/06/horizontal_1300ppi.png" alt="InersiaLab Logo">
+                    <img class="inersia-logo-img" src="https://inersialab.com/wp-content/uploads/2026/06/cropped-icon_orange_png.png" alt="InersiaLab Logo">
                 </a>
                 <button class="inersia-drawer-close" id="inersiaDrawerCloseBtn" aria-label="<?php echo esc_attr($close_label); ?>">
                     <svg class="inersia-close-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
