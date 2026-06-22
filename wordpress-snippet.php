@@ -90,10 +90,10 @@ function inersialab_inject_styles() {
         opacity: 1;
     }
     .inersia-site-header {
-        position: fixed;
+        position: fixed !important;
         top: 0;
-        left: 0 !important;
-        transform: none !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
         width: 100% !important;
         max-width: none;
         height: 90px;
@@ -108,16 +108,27 @@ function inersialab_inject_styles() {
         align-items: center;
         font-family: var(--inersia-font-main);
         box-shadow: none !important;
-        transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+        will-change: transform, height, width, top, background-color;
+        backface-visibility: hidden;
+        transform-style: preserve-3d;
+        transition: height 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                    width 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                    max-width 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                    top 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                    background 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                    border-radius 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                    border 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                    box-shadow 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                    backdrop-filter 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                    -webkit-backdrop-filter 0.5s cubic-bezier(0.25, 1, 0.5, 1);
     }
     .inersia-site-header.scrolled {
-        height: 75px;
-        background: rgba(255, 255, 255, 0.85) !important;
+        height: 70px;
+        background: rgba(9, 25, 43, 0.95) !important;
         backdrop-filter: blur(16px) !important;
         -webkit-backdrop-filter: blur(16px) !important;
-        border-bottom: 1.5px solid var(--inersia-border-color) !important;
-        border-radius: 0 !important;
-        box-shadow: 0 10px 30px rgba(13, 27, 42, 0.06) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+        box-shadow: 0 10px 30px rgba(9, 25, 43, 0.2) !important;
     }
     .inersia-header-container {
         width: 100%;
@@ -133,15 +144,37 @@ function inersialab_inject_styles() {
         align-items: center;
         gap: 10px;
         text-decoration: none;
+        position: relative;
+        flex-shrink: 0;
     }
     .inersia-logo-img {
         height: 48px;
         display: block;
         object-fit: contain;
-        transition: height 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+        transition: height 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                    opacity 0.4s ease;
+    }
+    .inersia-logo-img.scrolled-logo {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        pointer-events: none;
+        transform: none !important;
+        object-fit: contain;
     }
     .inersia-site-header.scrolled .inersia-logo-img {
         height: 40px;
+    }
+    .inersia-site-header.scrolled .default-logo {
+        opacity: 0;
+        pointer-events: none;
+    }
+    .inersia-site-header.scrolled .scrolled-logo {
+        opacity: 1;
+        pointer-events: auto;
     }
     .inersia-desktop-nav {
         display: flex;
@@ -156,7 +189,7 @@ function inersialab_inject_styles() {
     }
     .inersia-desktop-nav a {
         text-decoration: none;
-        color: #0D1B2A !important; 
+        color: var(--inersia-white) !important; 
         font-size: 15px;
         font-weight: 400;
         transition: var(--inersia-transition);
@@ -164,7 +197,7 @@ function inersialab_inject_styles() {
         padding: 6px 0;
     }
     .inersia-site-header.scrolled .inersia-desktop-nav a {
-        color: #0D1B2A !important;
+        color: var(--inersia-white) !important;
     }
     .inersia-desktop-nav a::after {
         content: '';
@@ -186,6 +219,7 @@ function inersialab_inject_styles() {
         display: flex;
         align-items: center;
         gap: 20px;
+        flex-shrink: 0;
     }
     .inersia-btn-cta {
         display: inline-block;
@@ -224,15 +258,15 @@ function inersialab_inject_styles() {
     .inersia-hamburger-menu .inersia-bar {
         width: 100% !important;
         height: 2px !important;
-        background-color: #0D1B2A !important; 
+        background-color: var(--inersia-white) !important; 
         border-radius: 2px !important;
         transition: var(--inersia-transition) !important;
     }
     .inersia-site-header.scrolled .inersia-hamburger-menu .inersia-bar {
-        background-color: #0D1B2A !important;
+        background-color: var(--inersia-white) !important;
     }
     .inersia-hamburger-menu.active .inersia-bar {
-        background-color: var(--inersia-white) !important;
+        background-color: #0D1B2A !important;
     }
     .inersia-hamburger-menu.active .line-top {
         transform: translateY(8px) rotate(45deg) !important;
@@ -452,7 +486,8 @@ function inersialab_get_header_markup() {
     <header class="inersia-site-header" id="inersiaSiteHeader" dir="<?php echo $dir; ?>">
         <div class="inersia-header-container">
             <a href="<?php echo esc_url($logo_url); ?>" class="inersia-logo">
-                <img class="inersia-logo-img" src="https://inersialab.com/wp-content/uploads/2026/06/horizontal_1_png.png" alt="InersiaLab Logo">
+                <img class="inersia-logo-img default-logo" src="https://inersialab.com/wp-content/uploads/2026/06/horizontal_1_png.png" alt="InersiaLab Logo">
+                <img class="inersia-logo-img scrolled-logo" src="https://inersialab.com/wp-content/uploads/2026/06/horizontal_2_png.png" alt="InersiaLab Logo">
             </a>
             <nav class="inersia-desktop-nav">
                 <ul>
@@ -528,7 +563,10 @@ function inersialab_inject_scripts() {
         if (navDrawer) navDrawer.addEventListener('click', (e) => { if (e.target === navDrawer) closeDrawer(); });
 
         window.addEventListener('scroll', () => {
-            siteHeader.classList.toggle('scrolled', window.scrollY > 50);
+            if (siteHeader) {
+                const scrollTop = window.scrollY || document.documentElement.scrollTop;
+                siteHeader.classList.toggle('scrolled', scrollTop > 50);
+            }
         });
 
         const cursor     = document.getElementById('inersiaCursor');
