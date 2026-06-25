@@ -315,7 +315,6 @@ function inersialab_inject_styles() {
         height: 100%;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
         padding: 24px;
     }
     .inersia-nav-drawer-header {
@@ -439,9 +438,7 @@ function inersialab_inject_styles() {
         transform: scale(1.02);
     }
     .inersia-drawer-footer {
-        margin-top: auto;
-        padding-top: 24px;
-        border-top: 1px solid var(--inersia-border-color);
+        padding-top: 20px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -459,42 +456,15 @@ function inersialab_inject_styles() {
     }
     .inersia-footer-email {
         font-family: var(--inersia-font-main);
-        font-size: 15px;
+        font-size: 14px;
         font-weight: 500;
-        color: #0D1B2A !important;
+        color: var(--inersia-steel-mist) !important;
         text-decoration: none;
         transition: color 0.3s ease;
-        margin-bottom: 16px;
         display: inline-block;
     }
     .inersia-footer-email:hover {
         color: var(--inersia-primary-orange) !important;
-    }
-    .inersia-footer-socials {
-        display: flex;
-        gap: 16px;
-        justify-content: center;
-        align-items: center;
-    }
-    .inersia-footer-socials a {
-        color: #0D1B2A !important;
-        transition: color 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        background-color: rgba(13, 27, 42, 0.04);
-    }
-    .inersia-footer-socials a:hover {
-        color: var(--inersia-primary-orange) !important;
-        background-color: rgba(244, 96, 54, 0.08);
-        transform: translateY(-3px);
-    }
-    .inersia-footer-socials svg {
-        width: 16px;
-        height: 16px;
     }
     @media (max-width: 991px) {
         :root {
@@ -653,17 +623,6 @@ function inersialab_get_header_markup() {
             </nav>
             <div class="inersia-drawer-footer">
                 <a href="mailto:<?php echo esc_attr($footer_email); ?>" class="inersia-footer-email"><?php echo esc_html($footer_email); ?></a>
-                <div class="inersia-footer-socials">
-                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1 2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.8v8.37h2.8v-4.87c0-.26.05-.52.13-.7a.78.78 0 0 1 .72-.53c.52 0 .68.43.68.87v5.23h2.8zM6.5 8.37a1.37 1.37 0 1 0 0-2.75 1.37 1.37 0 0 0 0 2.75M8 18.5V10.13H5v8.37h3z" fill="currentColor"/></svg>
-                    </a>
-                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.67 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.64-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07c-4.27.2-6.66 2.59-6.85 6.85C.01 8.2 0 8.61 0 11.88s.01 3.68.07 4.96c.2 4.27 2.6 6.66 6.85 6.85 1.28.06 1.69.07 4.96.07s3.68-.01 4.96-.07c4.27-.2 6.66-2.6 6.85-6.85.06-1.28.07-1.69.07-4.96s-.01-3.68-.07-4.96c-.2-4.27-2.6-6.66-6.85-6.85C15.57.01 15.16 0 11.88 0zm0 5.78a6.1 6.1 0 1 0 0 12.2 6.1 6.1 0 0 0 0-12.2m0 10.04a3.94 3.94 0 1 1 0-7.88 3.94 3.94 0 0 1 0 7.88m6.41-10.32a1.43 1.43 0 1 0 0-2.85 1.43 1.43 0 0 0 0 2.85" fill="currentColor"/></svg>
-                    </a>
-                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="currentColor"/></svg>
-                    </a>
-                </div>
             </div>
         </div>
     </div>
