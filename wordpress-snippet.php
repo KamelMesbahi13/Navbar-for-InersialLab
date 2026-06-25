@@ -22,6 +22,8 @@ function inersialab_inject_styles() {
         --inersia-border-color: rgba(30, 58, 95, 0.12); 
         --inersia-font-main: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         --inersia-transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+        --menu-x: calc(100% - 38px);
+        --menu-y: 35px;
     }
     @media (min-width: 992px) {
         body.inersia-mouse-active:not(.elementor-editor-active):not(.et-fb-active):not(.fl-builder-active), 
@@ -123,12 +125,15 @@ function inersialab_inject_styles() {
                     -webkit-backdrop-filter 0.5s cubic-bezier(0.25, 1, 0.5, 1);
     }
     .inersia-site-header.scrolled {
-        height: 70px;
-        background: rgba(9, 25, 43, 0.95) !important;
+        height: 80px;
+    }
+    .inersia-site-header.scrolled,
+    .inersia-site-header.inersia-non-home {
+        background: rgba(255, 255, 255, 0.85) !important;
         backdrop-filter: blur(16px) !important;
         -webkit-backdrop-filter: blur(16px) !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-        box-shadow: 0 10px 30px rgba(9, 25, 43, 0.2) !important;
+        border-bottom: 1px solid rgba(13, 27, 42, 0.08) !important;
+        box-shadow: 0 4px 20px rgba(13, 27, 42, 0.05) !important;
     }
     .inersia-header-container {
         width: 100%;
@@ -165,14 +170,13 @@ function inersialab_inject_styles() {
         transform: none !important;
         object-fit: contain;
     }
-    .inersia-site-header.scrolled .inersia-logo-img {
-        height: 40px;
-    }
-    .inersia-site-header.scrolled .default-logo {
+    .inersia-site-header.scrolled .default-logo,
+    .inersia-site-header.inersia-non-home .default-logo {
         opacity: 0;
         pointer-events: none;
     }
-    .inersia-site-header.scrolled .scrolled-logo {
+    .inersia-site-header.scrolled .scrolled-logo,
+    .inersia-site-header.inersia-non-home .scrolled-logo {
         opacity: 1;
         pointer-events: auto;
     }
@@ -196,8 +200,12 @@ function inersialab_inject_styles() {
         position: relative;
         padding: 6px 0;
     }
-    .inersia-site-header.scrolled .inersia-desktop-nav a {
-        color: var(--inersia-white) !important;
+    .inersia-site-header.scrolled .inersia-desktop-nav a,
+    .inersia-site-header.inersia-non-home .inersia-desktop-nav a {
+        color: #0D1B2A !important;
+    }
+    .inersia-site-header .inersia-desktop-nav a:hover {
+        color: var(--inersia-primary-orange) !important;
     }
     .inersia-desktop-nav a::after {
         content: '';
@@ -262,8 +270,9 @@ function inersialab_inject_styles() {
         border-radius: 2px !important;
         transition: var(--inersia-transition) !important;
     }
-    .inersia-site-header.scrolled .inersia-hamburger-menu .inersia-bar {
-        background-color: var(--inersia-white) !important;
+    .inersia-site-header.scrolled .inersia-hamburger-menu .inersia-bar,
+    .inersia-site-header.inersia-non-home .inersia-hamburger-menu .inersia-bar {
+        background-color: #0D1B2A !important;
     }
     .inersia-hamburger-menu.active .inersia-bar {
         background-color: #0D1B2A !important;
@@ -280,20 +289,26 @@ function inersialab_inject_styles() {
     .inersia-nav-drawer {
         position: fixed;
         top: 0;
-        left: 50% !important;
+        left: 0 !important;
         width: 100vw !important;
         height: 100vh !important;
         background-color: #ffffff; 
         z-index: 1000;
-        transform: translate(-50%, -100%) !important; 
+        clip-path: circle(0px at var(--menu-x) var(--menu-y));
         visibility: hidden;
-        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.5s;
+        transition: clip-path 0.75s cubic-bezier(0.85, 0, 0.15, 1), visibility 0.75s;
         overflow: hidden;
         font-family: var(--inersia-font-main);
     }
+    .inersia-nav-drawer[dir="rtl"] {
+        --menu-x: 38px;
+    }
     .inersia-nav-drawer.open {
-        transform: translate(-50%, 0) !important; 
+        clip-path: circle(150% at var(--menu-x) var(--menu-y));
         visibility: visible;
+    }
+    .inersia-nav-drawer .inersia-logo-img {
+        height: 52px;
     }
     .inersia-nav-drawer-container {
         width: 100%;
@@ -334,27 +349,39 @@ function inersialab_inject_styles() {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
+        align-items: stretch;
         flex-grow: 1;
+        width: 100%;
     }
     .inersia-mobile-nav ul {
         list-style: none;
-        text-align: center;
+        text-align: left;
         margin: 0;
         padding: 0;
+        width: 100%;
+    }
+    .inersia-nav-drawer[dir="rtl"] .inersia-mobile-nav ul {
+        text-align: right;
     }
     .inersia-mobile-nav li {
-        margin: 24px 0; 
+        margin: 0; 
+        width: 100%;
+        border-bottom: 1px solid var(--inersia-border-color);
         overflow: hidden;
+    }
+    .inersia-mobile-nav li:first-child {
+        border-top: 1px solid var(--inersia-border-color);
     }
     .inersia-mobile-nav ul a {
         display: block;
         font-family: var(--inersia-font-main) !important; 
-        font-size: 20px; 
-        font-weight: 400; 
+        font-size: 21px; 
+        font-weight: 500; 
         color: #0D1B2A !important; 
         text-decoration: none;
-        transition: var(--inersia-transition);
+        padding: 15px 0;
+        width: 100%;
+        transition: color 0.3s ease, padding-left 0.3s ease, padding-right 0.3s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
         opacity: 0;
         transform: translateY(30px);
     }
@@ -362,13 +389,18 @@ function inersialab_inject_styles() {
         opacity: 1;
         transform: translateY(0);
     }
-    .inersia-nav-drawer.open .inersia-mobile-nav li:nth-child(1) a { transition-delay: 0.1s; }
-    .inersia-nav-drawer.open .inersia-mobile-nav li:nth-child(2) a { transition-delay: 0.15s; }
-    .inersia-nav-drawer.open .inersia-mobile-nav li:nth-child(3) a { transition-delay: 0.2s; }
-    .inersia-nav-drawer.open .inersia-mobile-nav li:nth-child(4) a { transition-delay: 0.25s; }
+    .inersia-nav-drawer.open .inersia-mobile-nav li:nth-child(1) a { transition-delay: 0.15s; }
+    .inersia-nav-drawer.open .inersia-mobile-nav li:nth-child(2) a { transition-delay: 0.22s; }
+    .inersia-nav-drawer.open .inersia-mobile-nav li:nth-child(3) a { transition-delay: 0.29s; }
+    .inersia-nav-drawer.open .inersia-mobile-nav li:nth-child(4) a { transition-delay: 0.36s; }
+    .inersia-nav-drawer.open .inersia-mobile-nav li:nth-child(5) a { transition-delay: 0.43s; }
     .inersia-mobile-nav ul a:hover {
         color: var(--inersia-primary-orange) !important; 
-        transform: scale(1.05);
+        padding-left: 10px;
+    }
+    .inersia-nav-drawer[dir="rtl"] .inersia-mobile-nav ul a:hover {
+        padding-left: 0;
+        padding-right: 10px;
     }
     .inersia-btn-cta-large {
         display: flex !important;
@@ -406,7 +438,68 @@ function inersialab_inject_styles() {
         box-shadow: 0 4px 20px rgba(244, 96, 54, 0.3);
         transform: scale(1.02);
     }
+    .inersia-drawer-footer {
+        margin-top: auto;
+        padding-top: 24px;
+        border-top: 1px solid var(--inersia-border-color);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
+                    transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        transition-delay: 0.45s;
+    }
+    .inersia-nav-drawer.open .inersia-drawer-footer {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .inersia-footer-email {
+        font-family: var(--inersia-font-main);
+        font-size: 15px;
+        font-weight: 500;
+        color: #0D1B2A !important;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        margin-bottom: 16px;
+        display: inline-block;
+    }
+    .inersia-footer-email:hover {
+        color: var(--inersia-primary-orange) !important;
+    }
+    .inersia-footer-socials {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        align-items: center;
+    }
+    .inersia-footer-socials a {
+        color: #0D1B2A !important;
+        transition: color 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background-color: rgba(13, 27, 42, 0.04);
+    }
+    .inersia-footer-socials a:hover {
+        color: var(--inersia-primary-orange) !important;
+        background-color: rgba(244, 96, 54, 0.08);
+        transform: translateY(-3px);
+    }
+    .inersia-footer-socials svg {
+        width: 16px;
+        height: 16px;
+    }
     @media (max-width: 991px) {
+        :root {
+            --menu-y: 37px;
+        }
         .inersia-desktop-nav {
             display: none;
         }
@@ -414,10 +507,24 @@ function inersialab_inject_styles() {
             display: flex;
         }
         .inersia-site-header {
-            height: 70px;
+            height: 75px;
+        }
+        .inersia-site-header .inersia-logo-img {
+            height: 40px;
         }
         .inersia-header-actions .inersia-btn-cta {
             display: none;
+        }
+    }
+    @media (max-width: 480px) {
+        :root {
+            --menu-y: 35px;
+        }
+        .inersia-site-header {
+            height: 70px;
+        }
+        .inersia-site-header .inersia-logo-img {
+            height: 35px;
         }
     }
     /* RTL adjustments */
@@ -449,7 +556,10 @@ function inersialab_get_header_markup() {
     $is_arabic = (strpos($request_uri, '/ar/') !== false || preg_match('#/ar$#', $request_uri));
     $dir = $is_arabic ? 'rtl' : 'ltr';
 
+    $show_home_link = !is_front_page();
+
     if ($is_arabic) {
+        $nav_home       = 'الرئيسية';
         $nav_services   = 'الخدمات';
         $nav_about      = 'من نحن';
         $nav_portfolio  = 'أعمالنا';
@@ -459,11 +569,15 @@ function inersialab_get_header_markup() {
         $close_label    = 'إغلاق القائمة';
         $logo_url       = home_url('/ar/');
         
+        $home_link      = home_url('/ar/');
         $services_link  = '/ar/services/';
         $about_link     = '/ar/about/';
         $portfolio_link = '/ar/portfolio/';
         $contact_link   = '/ar/contact/';
+        
+        $footer_email   = 'info@inersialab.com';
     } else {
+        $nav_home       = 'Accueil';
         $nav_services   = 'Services';
         $nav_about      = 'À propos';
         $nav_portfolio  = 'Portfolio';
@@ -473,24 +587,30 @@ function inersialab_get_header_markup() {
         $close_label    = 'Fermer le menu';
         $logo_url       = home_url('/');
         
+        $home_link      = home_url('/');
         $services_link  = '/services/';
         $about_link     = '/about/';
         $portfolio_link = '/portfolio/';
         $contact_link   = '/contact/';
+        
+        $footer_email   = 'info@inersialab.com';
     }
 
     ob_start();
     ?>
     <div class="inersia-cursor" id="inersiaCursor"></div>
     <div class="inersia-cursor-ring" id="inersiaCursorRing"></div>
-    <header class="inersia-site-header" id="inersiaSiteHeader" dir="<?php echo $dir; ?>">
+    <header class="inersia-site-header<?php echo $show_home_link ? ' inersia-non-home' : ''; ?>" id="inersiaSiteHeader" dir="<?php echo $dir; ?>">
         <div class="inersia-header-container">
             <a href="<?php echo esc_url($logo_url); ?>" class="inersia-logo">
-                <img class="inersia-logo-img default-logo" src="https://inersialab.com/wp-content/uploads/2026/06/horizontal_1_png.png" alt="InersiaLab Logo">
-                <img class="inersia-logo-img scrolled-logo" src="https://inersialab.com/wp-content/uploads/2026/06/horizontal_2_png.png" alt="InersiaLab Logo">
+                <img class="inersia-logo-img default-logo" src="https://inersialab.com/wp-content/uploads/2026/06/horizontal_2_png.png" alt="InersiaLab Logo">
+                <img class="inersia-logo-img scrolled-logo" src="https://inersialab.com/wp-content/uploads/2026/06/horizontal_1_png.png" alt="InersiaLab Logo">
             </a>
             <nav class="inersia-desktop-nav">
                 <ul>
+                    <?php if ($show_home_link) : ?>
+                        <li><a href="<?php echo esc_url($home_link); ?>"><?php echo esc_html($nav_home); ?></a></li>
+                    <?php endif; ?>
                     <li><a href="<?php echo esc_url($services_link); ?>"><?php echo esc_html($nav_services); ?></a></li>
                     <li><a href="<?php echo esc_url($about_link); ?>"><?php echo esc_html($nav_about); ?></a></li>
                     <li><a href="<?php echo esc_url($portfolio_link); ?>"><?php echo esc_html($nav_portfolio); ?></a></li>
@@ -521,6 +641,9 @@ function inersialab_get_header_markup() {
             </div>
             <nav class="inersia-mobile-nav">
                 <ul>
+                    <?php if ($show_home_link) : ?>
+                        <li><a href="<?php echo esc_url($home_link); ?>"><?php echo esc_html($nav_home); ?></a></li>
+                    <?php endif; ?>
                     <li><a href="<?php echo esc_url($services_link); ?>"><?php echo esc_html($nav_services); ?></a></li>
                     <li><a href="<?php echo esc_url($about_link); ?>"><?php echo esc_html($nav_about); ?></a></li>
                     <li><a href="<?php echo esc_url($portfolio_link); ?>"><?php echo esc_html($nav_portfolio); ?></a></li>
@@ -528,6 +651,20 @@ function inersialab_get_header_markup() {
                 </ul>
                 <a href="<?php echo esc_url($contact_link); ?>" class="inersia-btn-cta-large"><?php echo esc_html($nav_cta); ?></a>
             </nav>
+            <div class="inersia-drawer-footer">
+                <a href="mailto:<?php echo esc_attr($footer_email); ?>" class="inersia-footer-email"><?php echo esc_html($footer_email); ?></a>
+                <div class="inersia-footer-socials">
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1 2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.8v8.37h2.8v-4.87c0-.26.05-.52.13-.7a.78.78 0 0 1 .72-.53c.52 0 .68.43.68.87v5.23h2.8zM6.5 8.37a1.37 1.37 0 1 0 0-2.75 1.37 1.37 0 0 0 0 2.75M8 18.5V10.13H5v8.37h3z" fill="currentColor"/></svg>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.67 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.64-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07c-4.27.2-6.66 2.59-6.85 6.85C.01 8.2 0 8.61 0 11.88s.01 3.68.07 4.96c.2 4.27 2.6 6.66 6.85 6.85 1.28.06 1.69.07 4.96.07s3.68-.01 4.96-.07c4.27-.2 6.66-2.6 6.85-6.85.06-1.28.07-1.69.07-4.96s-.01-3.68-.07-4.96c-.2-4.27-2.6-6.66-6.85-6.85C15.57.01 15.16 0 11.88 0zm0 5.78a6.1 6.1 0 1 0 0 12.2 6.1 6.1 0 0 0 0-12.2m0 10.04a3.94 3.94 0 1 1 0-7.88 3.94 3.94 0 0 1 0 7.88m6.41-10.32a1.43 1.43 0 1 0 0-2.85 1.43 1.43 0 0 0 0 2.85" fill="currentColor"/></svg>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="currentColor"/></svg>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
     <?php
